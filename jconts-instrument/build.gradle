@@ -1,0 +1,18 @@
+dependencies {
+    compile project(':jconts')
+
+    compile 'asm:asm-all:3.3.1'
+
+    jar {
+        manifest {
+            attributes 'Premain-Class': 'com.google.code.jconts.instrument.Main'
+        }
+    }
+
+    test {
+        jvmArgs "-javaagent:${jar.archivePath}"
+    }
+
+}
+
+test.dependsOn jar

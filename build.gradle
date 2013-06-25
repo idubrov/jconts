@@ -1,0 +1,23 @@
+defaultTasks 'clean', 'build'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+
+    targetCompatibility = '1.6'
+    sourceCompatibility = '1.6'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.8.2'
+    }
+
+    version = '0.1.0'
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+}
