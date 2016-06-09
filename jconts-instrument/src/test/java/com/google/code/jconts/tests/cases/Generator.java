@@ -15,13 +15,13 @@
  */
 package com.google.code.jconts.tests.cases;
 
+import com.google.code.jconts.Computation;
+import com.google.code.jconts.Continuation;
+import com.google.code.jconts.util.EmptyContinuation;
+
 import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-
-import com.google.code.jconts.Computation;
-import com.google.code.jconts.Continuation;
-import com.google.code.jconts.tests.EmptyContinuation;
 
 public abstract class Generator<T> implements Iterable<T> {
 

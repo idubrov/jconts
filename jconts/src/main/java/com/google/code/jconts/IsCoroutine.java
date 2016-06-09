@@ -13,17 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.code.jconts.tests;
+package com.google.code.jconts;
 
-import com.google.code.jconts.Continuation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class EmptyContinuation<T> implements Continuation<T> {
-
-	@Override
-	public void invoke(T data) {
-	}
-
-	@Override
-	public void setException(Throwable t) {
-	}
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.CLASS)
+public @interface IsCoroutine {
 }

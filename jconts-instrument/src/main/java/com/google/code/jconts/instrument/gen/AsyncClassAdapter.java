@@ -77,7 +77,7 @@ public class AsyncClassAdapter extends ClassAdapter {
 				Type.getMethodDescriptor(Type.VOID_TYPE, new Type[] {
 						info.stateType, Type.INT_TYPE }), null, exceptions);
 
-		return new AsyncMethodAdapter(info, mv) {
+		MethodVisitor methodVisitor = new AsyncMethodAdapter(info, mv) {
 			@Override
 			public void visitEnd() {
 				super.visitEnd();
@@ -86,6 +86,10 @@ public class AsyncClassAdapter extends ClassAdapter {
 				new StateClassGenerator(info).accept(context);
 			}
 		};
+		if (info.isCoroutine()) {
+			methodVisitor = new CoroutineMethodAdapter(info, methodVisitor);
+		}
+		return methodVisitor;
 	}
 
 	@Override

@@ -76,9 +76,12 @@ public final class MethodContext {
 	/** Name of the Continuation&lt;T&gt; implementor */
 	public final String continuationClassName;
 	public final String continuationSimpleName;
+	/** If method is actually coroutine */
+	private final boolean coroutine;
 
 	public MethodContext(String owner, String ownerSource, int access,
-			String name, String desc, String signature, String[] exceptions) {
+			String name, String desc, String signature, String[] exceptions,
+			boolean coroutine) {
 		this.owner = owner;
 		this.ownerSource = ownerSource;
 		this.access = access;
@@ -94,19 +97,20 @@ public final class MethodContext {
 		this.entryLocalsVars = tracker.stateFields(entryLocals);
 
 		this.stateSimpleName = name + "_State";
-		this.stateClassName = owner + '$' + stateSimpleName;		
+		this.stateClassName = owner + '$' + stateSimpleName;
 		this.stateType = Type.getObjectType(stateClassName);
 
 		this.computationSimpleName = name + "_Computation";
 		this.computationClassName = owner + '$' + computationSimpleName;
-		
+
 		this.continuationSimpleName = name + "_Continuation";
 		this.continuationClassName = owner + '$' + continuationSimpleName;
+		this.coroutine = coroutine;
 	}
 
 	/**
 	 * If we are transforming a static method.
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isStatic() {
@@ -138,6 +142,10 @@ public final class MethodContext {
 		};
 		new SignatureReader(signature).accept(adaptor);
 		return sign.toString();
+	}
+
+	public boolean isCoroutine() {
+		return this.coroutine;
 	}
 
 	@Override

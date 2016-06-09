@@ -64,6 +64,13 @@ public final class Constants {
 	public static String AWAIT_NAME = "await";
 	public static String AWAIT_DESC = "(Lcom/google/code/jconts/Computation;)Ljava/lang/Object;";
 
+	public static String IS_COROUTINE_ANNOTATION_DESC = "Lcom/google/code/jconts/IsCoroutine;";
+	public static String COROUTINES_NAME = "com/google/code/jconts/Coroutines";
+	public static String COROUTINES_YIELD_NAME = "yield";
+	public static String COROUTINES_YIELD_DESC = "()" + COMPUTATION_DESC;
+
+	public static String COROUTINES_YIELD_RESULT_DESC = "(Ljava/lang/Object;)" + COMPUTATION_DESC;
+
 	private Constants() {
 		// No instances.
 	}

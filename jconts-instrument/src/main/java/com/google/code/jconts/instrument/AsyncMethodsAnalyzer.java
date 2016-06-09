@@ -63,14 +63,16 @@ public class AsyncMethodsAnalyzer extends EmptyVisitor {
 			public AnnotationVisitor visitAnnotation(String desc,
 					boolean visible) {
 				// FIXME: Validate return type!
-				if (desc.equals(Constants.IS_ASYNC_ANNOTATION_DESC)) {
+				boolean isAsync = desc.equals(Constants.IS_ASYNC_ANNOTATION_DESC);
+				boolean isCoroutine = desc.equals(Constants.IS_COROUTINE_ANNOTATION_DESC);
+				if (isAsync || isCoroutine) {
 					if (methods == null) {
 						methods = new HashMap<String, MethodContext>();
 					}
 					methods.put(MethodContext.keyOf(methodName, methodDesc),
 							new MethodContext(owner, ownerSource, access,
 									methodName, methodDesc, signature,
-									exceptions));
+									exceptions, isCoroutine));
 				}
 				return null;
 			}
